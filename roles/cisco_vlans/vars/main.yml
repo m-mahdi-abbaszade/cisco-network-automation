@@ -1,0 +1,27 @@
+---
+vlans:
+  - id: 10
+    name: Management
+  - id: 20
+    name: Servers
+  - id: 30
+    name: Users
+  - id: 99
+    name: Native
+
+access_ports:
+  - interface: GigabitEthernet0/1
+    vlan: 20
+    description: Server-01
+  - interface: GigabitEthernet0/2
+    vlan: 20
+    description: Server-02
+  - interface: GigabitEthernet0/3
+    vlan: 30
+    description: User-PC-01
+
+trunk_ports:
+  - interface: GigabitEthernet0/24
+    native_vlan: 99
+    allowed_vlans: [10,20,30,99]
+    description: Uplink-to-Core

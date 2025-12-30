@@ -1,0 +1,6 @@
+---
+- name: Configure VLANs and Port Assignments
+  hosts: all
+  gather_facts: no
+  roles:
+    - cisco_vlans

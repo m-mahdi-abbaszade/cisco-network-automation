@@ -1,0 +1,31 @@
+---
+- name: Create VLANs
+  ios_vlan:
+    vlan_id: "{{ item.id }}"
+    name: "{{ item.name }}"
+    state: present
+  loop: "{{ vlans }}"
+  notify: Save config
+
+- name: Configure Access Ports
+  ios_config:
+    lines:
+      - switchport mode access
+      - switchport access vlan {{ item.vlan }}
+      - description {{ item.description }}
+      - spanning-tree portfast
+      - spanning-tree bpduguard enable
+    parents: interface {{ item.interface }}
+  loop: "{{ access_ports }}"
+  notify: Save config
+
+- name: Configure Trunk Ports
+  ios_config:
+    lines:
+      - switchport mode trunk
+      - switchport trunk native vlan {{ item.native_vlan }}
+      - switchport trunk allowed vlan {{ item.allowed_vlans | join(',') }}
+      - description {{ item.description }}
+    parents: interface {{ item.interface }}
+  loop: "{{ trunk_ports }}"
+  notify: Save config

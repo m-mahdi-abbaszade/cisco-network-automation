@@ -1,0 +1,6 @@
+---
+- name: Cisco Base Configuration
+  hosts: all
+  gather_facts: no
+  roles:
+    - cisco_base

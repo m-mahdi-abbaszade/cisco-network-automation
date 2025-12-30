@@ -1,0 +1,35 @@
+---
+- name: Set hostname
+  ios_config:
+    lines:
+      - hostname {{ hostname_prefix }}-{{ inventory_hostname_short }}
+
+- name: Configure NTP servers
+  ios_config:
+    lines:
+      - ntp server {{ item }}
+    loop: "{{ ntp_servers }}"
+
+- name: Configure logging
+  ios_config:
+    lines:
+      - logging host {{ logging_host }}
+      - logging trap informational
+      - logging source-interface Loopback0
+
+- name: Set domain name
+  ios_config:
+    lines:
+      - ip domain-name {{ domain_name }}
+
+- name: Create local admin user
+  ios_config:
+    lines:
+      - username {{ local_user.username }} privilege {{ local_user.privilege }} secret {{ local_user.password }}
+
+- name: Configure login banner
+  ios_config:
+    lines:
+      - banner login ^
+{{ banner_login }}
+^

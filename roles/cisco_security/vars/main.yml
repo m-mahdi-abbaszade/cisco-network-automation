@@ -1,0 +1,13 @@
+---
+# Security hardening settings
+
+port_security_ports:
+  - GigabitEthernet0/1
+  - GigabitEthernet0/2
+  - GigabitEthernet0/3
+
+aaa_servers:
+  - server: 192.168.1.10
+    type: tacacs+
+  - server: 192.168.1.11
+    type: radius

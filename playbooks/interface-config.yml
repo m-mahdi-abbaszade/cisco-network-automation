@@ -1,0 +1,6 @@
+---
+- name: Configure Physical Interfaces
+  hosts: all
+  gather_facts: no
+  roles:
+    - cisco_interfaces

@@ -1,0 +1,22 @@
+---
+# Configure physical interface parameters: description, speed, duplex, shutdown/no shutdown
+
+- name: Configure interface description, speed, duplex, and status
+  ios_config:
+    lines:
+      - description {{ item.description }}
+      - speed {{ item.speed }}
+      - duplex {{ item.duplex }}
+      - "{{ 'shutdown' if item.status == 'down' else 'no shutdown' }}"
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  notify: Save config
+
+# Ensure loopback interface for management
+- name: Configure Loopback0 for management
+  ios_config:
+    lines:
+      - description Management Interface
+      - ip address 10.0.0.{{ inventory_hostname_short | regex_search('\d+') | default('1') }} 255.255.255.255
+    parents: interface Loopback0
+  notify: Save config

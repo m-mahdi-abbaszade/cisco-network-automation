@@ -1,0 +1,27 @@
+---
+# Interface configurations for speed, duplex, description, and status
+
+interfaces:
+  - name: GigabitEthernet0/1
+    description: "Server-01 Connection"
+    speed: 1000
+    duplex: full
+    status: up
+
+  - name: GigabitEthernet0/2
+    description: "Server-02 Connection"
+    speed: 1000
+    duplex: full
+    status: up
+
+  - name: GigabitEthernet0/23
+    description: "Uplink to Router"
+    speed: auto
+    duplex: auto
+    status: up
+
+  - name: GigabitEthernet0/24
+    description: "Backup Uplink"
+    speed: auto
+    duplex: auto
+    status: down  # Intentionally shut down

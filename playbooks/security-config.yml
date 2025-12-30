@@ -1,0 +1,6 @@
+---
+- name: Apply Security Hardening
+  hosts: all
+  gather_facts: no
+  roles:
+    - cisco_security

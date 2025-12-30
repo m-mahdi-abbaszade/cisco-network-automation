@@ -1,4 +1,6 @@
 ---
 - import_playbook: base-config.yml
 - import_playbook: vlan-config.yml
+- import_playbook: interface-config.yml
+- import_playbook: security-config.yml
 

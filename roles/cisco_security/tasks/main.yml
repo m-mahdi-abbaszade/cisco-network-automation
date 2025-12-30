@@ -1,0 +1,46 @@
+---
+# Enable port security on access ports
+- name: Enable port security with sticky MAC and maximum 1
+  ios_config:
+    lines:
+      - switchport port-security
+      - switchport port-security maximum 1
+      - switchport port-security mac-address sticky
+      - switchport port-security violation restrict
+    parents: interface {{ item }}
+  loop: "{{ port_security_ports }}"
+  notify: Save config
+
+# Configure storm control to prevent broadcast storms
+- name: Enable storm control on access ports (10% broadcast)
+  ios_config:
+    lines:
+      - storm-control broadcast level 10
+      - storm-control action shutdown
+    parents: interface {{ item }}
+  loop: "{{ port_security_ports }}"
+  notify: Save config
+
+# Configure AAA with TACACS+ fallback to local
+- name: Configure AAA new-model
+  ios_config:
+    lines:
+      - aaa new-model
+      - aaa authentication login default group tacacs+ local
+      - aaa authorization exec default group tacacs+ local
+      - aaa accounting exec default start-stop group tacacs+
+
+# Configure TACACS+/RADIUS servers
+- name: Configure AAA servers
+  ios_config:
+    lines:
+      - "{{ item.type }} server {{ item.server }}"
+    loop: "{{ aaa_servers }}"
+  when: aaa_servers is defined
+
+# Enable service password-encryption
+- name: Enable global password encryption
+  ios_config:
+    lines:
+      - service password-encryption
+  notify: Save config

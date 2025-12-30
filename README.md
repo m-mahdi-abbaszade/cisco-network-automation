@@ -45,7 +45,7 @@ ansible-playbook -i inventories/dev/hosts.yml playbooks/base-config.yml
 ansible-playbook -i inventories/dev/hosts.yml playbooks/vlan-config.yml
 ansible-playbook -i inventories/dev/hosts.yml playbooks/interface-config.yml
 ansible-playbook -i inventories/dev/hosts.yml playbooks/security-config.yml
-
+```
 🔒 Security Note
 Passwords are stored in plain text for demo purposes.
 In production, use Ansible Vault or AWX/Tower.

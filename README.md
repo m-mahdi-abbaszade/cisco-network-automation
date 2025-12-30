@@ -46,15 +46,15 @@ ansible-playbook -i inventories/dev/hosts.yml playbooks/vlan-config.yml
 ansible-playbook -i inventories/dev/hosts.yml playbooks/interface-config.yml
 ansible-playbook -i inventories/dev/hosts.yml playbooks/security-config.yml
 ```
-🔒 Security Note
+## 🔒 Security Note
 Passwords are stored in plain text for demo purposes.
 In production, use Ansible Vault or AWX/Tower.
-🤝 Contributing
+## 🤝 Contributing
 Pull requests are welcome! Feel free to open an issue or submit improvements.
-📝 Author
+## 📝 Author
 Mahdi Abbaszade
 Network Automation | DevOps | NetDevOps
 LinkedIn: linkedin.com/in/m-mahdi-abbaszade
-⭐ If you like this project, please give it a Star!
+## ⭐ If you like this project, please give it a Star!
 It helps me reach more Network & DevOps professionals.
 #NetworkAutomation #Ansible #Cisco #NetDevOps #DevOps #Automation #Networking
